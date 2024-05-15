@@ -1,0 +1,23 @@
+<!-- borrowing_show.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Borrowing Details</h2>
+<div>
+    <strong>Student:</strong> {{ borrowing.student }}
+</div>
+<div>
+    <strong>Book:</strong> {{ borrowing.book }}
+</div>
+<div>
+    <strong>Date Borrowed:</strong> {{ borrowing.date_borrowed }}
+</div>
+<div>
+    <strong>Returned:</strong> {{ borrowing.book_returned|yesno:"Yes,No" }}
+</div>
+<a href="{% url 'borrowing_edit' borrowing.id %}">Edit</a>
+<form action="{% url 'borrowing_delete' borrowing.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+</form>
+{% endblock %}

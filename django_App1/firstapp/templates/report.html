@@ -1,0 +1,20 @@
+<!-- most_popular_books.html -->
+{% extends 'base.html' %}
+
+{% block title %}Most popular books{% endblock %}
+
+{% block content %}
+  <h1>The most popular books</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>Title</th>
+      <th>Borrowed</th>
+    </tr>
+    {% for book in most %}
+    <tr>
+      <td>{{ book.book__title }}</td>
+      <td>{{ book.how_many }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

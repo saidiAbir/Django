@@ -1,0 +1,16 @@
+<!-- author_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Author List</h2>
+  <ul>
+    {% for author in authors %}
+      <li>
+        {{ author.name }} {{ author.surname }}
+        [<a href="{% url 'author_show' pk=author.pk %}">Show</a>]
+        [<a href="{% url 'author_edit' pk=author.pk %}">Edit</a>]
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'create_author' %}">Create New author</a>
+{% endblock %}

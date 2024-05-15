@@ -1,0 +1,11 @@
+<!-- borrowing_create.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Create Borrowing Record</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+{% endblock %}

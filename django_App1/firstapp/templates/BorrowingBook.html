@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Borrowing index{% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="d-flex">
+        <div class="p-1"> {{ form.as_p }}</div>
+        <div class="px-4"> <button type="submit" class="btn btn-success">Search</button></div>
+    </div>
+   
+   
+</form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>DateBorrowed</th>
+                <th>Title</th>
+                <th>Student</th>
+                <th>BookReturned</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for borrowing in borrowings %}
+                <tr>
+                    <td>{{ borrowing.date_borrowed | date:'Y-m-d '}}</td>
+                    <td>{{ borrowing.book.title }}</td>
+                    <td>{{ borrowing.student.name }} {{ borrowing.student.surname }}</td>
+                    <td>{{ borrowing.book_returned|yesno:"Yes,No"  }}</td>
+                    <td>
+                        <a href="{% url 'borrowing_show' borrowing.id %}">show</a>
+                        <a href="{% url 'borrowing_edit' borrowing.id %}">edit</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'borrowing_create' %}">Create new</a>
+{% endblock %}

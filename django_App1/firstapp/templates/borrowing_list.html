@@ -1,0 +1,20 @@
+<!-- borrowing_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Borrowing List</h2>
+<a href="{% url 'borrowing_create' %}">Create New Borrowing Record</a>
+<ul>
+    {% for borrowing in borrowings %}
+    <li>
+        {{ borrowing.student }} borrowed "{{ borrowing.book }}" on {{ borrowing.date_borrowed }} - Returned: {{ borrowing.book_returned|yesno:"Yes,No" }}
+        <a href="{% url 'borrowing_show' borrowing.id %}">View</a> |
+        <a href="{% url 'borrowing_edit' borrowing.id %}">Edit</a> |
+        <form action="{% url 'borrowing_delete' borrowing.id %}" method="post" style="display:inline">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
